@@ -1,0 +1,61 @@
+------------------Table-----------------
+CREATE proc [dbo].[Sp_Customer_Add]
+    @FullName  NVARCHAR (MAX) ,
+    @Email   NVARCHAR (MAX) ,
+    @Password    NVARCHAR (100) ,
+    @Mobile_no    NVARCHAR (MAX) 
+    
+     as
+     begin
+     insert into tbl_Customer_master values (
+     @FullName   ,
+    @Email  ,
+    @Password   ,
+    @Mobile_no  ,
+    GETDATE()          
+     )
+     end
+
+----------------------Procedure------------------
+CREATE PROCEDURE [dbo].[GetCustomerListDetails] --1  
+@userid varchar(50)     
+AS   
+BEGIN   
+if @userid !=0
+begin
+SELECT Customer_Id, FullName,Email,Mobile_no,Created_At FROM tbl_Customer_master WHERE Customer_Id = @userid
+end
+else
+SELECT Customer_Id, FullName,Email,Mobile_no,Created_At FROM tbl_Customer_master   
+END  
+
+
+------------2-------
+ALTER PROCEDURE [dbo].[LoginByUsernamePassword]   
+@userid varchar(50),   
+@password varchar(50)   
+AS   
+BEGIN   
+SELECT Customer_Id, password   
+FROM tbl_Customer_master   
+WHERE Customer_Id = @userid   
+AND [Password] = @password   
+END   
+
+--------3-------------------
+Create proc [dbo].[Sp_Customer_Add]
+    @FullName  NVARCHAR (MAX) ,
+    @Email   NVARCHAR (MAX) ,
+    @Password    NVARCHAR (100) ,
+    @Mobile_no    NVARCHAR (MAX) 
+    
+     as
+     begin
+     insert into tbl_Customer_master values (
+     @FullName   ,
+    @Email  ,
+    @Password   ,
+    @Mobile_no  ,
+    GETDATE()          
+     )
+     end
